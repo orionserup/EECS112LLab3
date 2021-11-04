@@ -1,0 +1,103 @@
+# Template for Lab 3. You should put your codes for problem 1.1 1.2 2.1 2.2 3.1 3.2 4.1 4.3 here. 
+
+# File Name: lab3.txt
+
+#
+# Program 1.1
+program_1_1: # this is the label for the assembly program
+# -------- begin your MIPS assembly code --------
+
+add $t0, $s2, $s3  # add g and h and put them in a temp variable
+add $t1, $s4, $s0  # add i and j and store it in a temporary
+sub $s1, $t0, $t1  # subtract the temporaries and store it in f
+
+# -------- end ----------------------------------
+
+#
+# Program 1.2
+# -------- begin your MIPS Machine code ---------
+
+00000010010100110100000000100000 # add $t0, $s2, $s3
+00000010100100000100100000100000 # add $t1, $s4, $s0
+00000001000010011000100000100010 # sub $s1, $t0, $t1
+
+# -------- end ----------------------------------
+
+#
+# Program 2.1
+program_2_1:
+# -------- begin your MIPS assembly code --------
+
+beq $s4, $s0, SUB  # if i and j are the same then subtract g and h 
+add $s1, $s2, $s3  # add g and h and store in f
+beq $zero, $zero, END # jump to the end
+SUB: sub $s1, $s2, $s3  # subtract h from g and store in f 
+END: 
+
+# -------- end ----------------------------------
+
+#
+# Program 2.2
+# -------- begin your MIPS Machine code ---------
+
+00010010100100000000000000000011
+00000010010100111000100000100000
+00010000000000000000000000000010
+00000010010100111000100000100010
+
+# -------- end ----------------------------------
+
+#
+# Program 3.1
+program_3_1:
+# -------- begin your MIPS assembly code --------
+
+LOOP:
+add $t2, $t0, $s2 # fill a temp variable with i + base address
+lw $t1, 0($t2)     # find the value at that address
+beq $t1, $s1, END # if the value is euqal to k then leave the loop
+addi $t0, $t0, 1  # increase i so the address we are looking at increases
+beq $zero, $zero, LOOP            # jump back to the beggining of the loop
+END:              # end of the function  
+
+# -------- end ----------------------------------
+
+#
+# Program 3.2
+# -------- begin your MIPS Machine code ---------
+
+00000001000100100101000000100000 # add $t2, $t0, $s2 # fill a temp variable with i + base address
+10001101010010010000000000000000 # lw $t1, 0($t2)     # find the value at that address
+00010001001100010000000000000010 # beq $t1, $s1, END # if the value is euqal to k then leave the loop
+00100001000010000000000000000001 # addi $t0, $t0, 1  # increase i so the address we are looking at increases
+00010000000000001111111111111011 # beq $zero, $zero, LOOP            # jump back to the beggining of the loop
+
+# -------- end ----------------------------------
+
+#
+# Program 4.1
+# -------- begin your MIPS Machine code ---------
+
+00000000000001010100000010000000
+00000000100010000100000000100000
+10001101000010010000000000000000
+10001101000010100000000000000100
+10101101000010100000000000000000
+10101101000010010000000000000100
+
+# -------- end ----------------------------------
+
+#
+# Program 4.3
+void program_4_3(int offset, int address){
+# -------- begin your C code --------------------
+ 
+    int* base = (int*)(address << 2 + offset); // figure out the address you want to do the action at
+    int val1 = d[0];  // get the first value at the address
+    int val2 = d[1];  // get the second value at the address
+    d[0] = val2;      // swap the first value
+    d[1] = val1;      // swap the second value
+
+# -------- end ----------------------------------
+    return;
+}
